@@ -11,6 +11,16 @@ body {
     min-height: 100vh;
 }
 
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo-img {
+    max-height: 40px; /* Adjust the max height to fit your design */
+    margin-right: 10px; /* Add some spacing on the right side of the logo */
+}
+
 nav {
     background: #333;
     color: #fff;
@@ -62,11 +72,11 @@ nav .logo {
         display: none;
     }
 
-    nav .menu-icon {
+    .menu-icon {
         display: block;
     }
 
-    nav .menu.active {
+    .menu.active {
         display: flex;
         flex-direction: column;
         position: fixed;
@@ -74,24 +84,24 @@ nav .logo {
         right: 0;
         width: 250px;
         height: 100%;
-        transition: right 0.3s;
+        background: #333;
+        color: #fff;
+        transition: right 0.3s; /* Smoothly open the menu */
+        padding: 20px 10px 0 10px; /* Add spacing and move the close icon to the top left */
     }
-
-    nav .menu.active a {
-        text-align: right;
+    
+    .menu.active a {
+        text-align: left; /* Adjust text alignment */
+        margin: 10px 0; /* Add spacing between menu items */
     }
-
-    nav .menu.active .close-icon {
+    
+    .menu.active .close-icon {
         display: block;
-    }
-}
-
-@media (min-width: 769px) {
-    nav .menu {
-        display: flex;
-    }
-
-    nav .menu-icon {
-        display: none;
+        position: absolute; /* Position the close icon at the top left */
+        top: 10px;
+        left: 10px;
+        font-family: 'Material Symbols Outlined', sans-serif;
+        font-size: 24px; /* Adjust the font size as needed */
+        color: #fff; /* Set the color of the close icon */
     }
 }
