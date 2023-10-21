@@ -8,7 +8,8 @@ user_input = input("Enter City: ")
 
 current_weather = requests.get(f"{base}/current.json?key={APIkey}&q={user_input}&aqi=yes").json()
 
-print(current_weather)
+with open('data.json', 'w') as file:
+    
 
 
 
