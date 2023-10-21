@@ -27,50 +27,59 @@ links.forEach(link => {
 })
 
 document.getElementById('signupForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-    
-            const email = document.getElementById('signupEmail').value;
-            const password = document.getElementById('signupPassword').value;
-    
-            fetch('http://localhost:3001/users/signup', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email, password }),
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert('Signup successful!');
-                } else {
-                    alert('Signup failed: ' + data.message);
-                }
-            });
-        });
-    
-        document.getElementById('loginForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-    
-            const email = document.getElementById('loginEmail').value;
-            const password = document.getElementById('loginPassword').value;
-    
-            fetch('http://localhost:3001/users/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email, password }),
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    // You may want to store the token in localStorage/sessionStorage
-                    // and use it for authenticated requests
-                    localStorage.setItem('token', data.token);
-                    alert('Login successful!');
-                } else {
-                    alert('Login failed: ' + data.message);
-                }
-            });
-        });
+    event.preventDefault();
+
+    const email = document.getElementById('signupEmail').value;
+    const password = document.getElementById('signupPassword').value;
+
+    if (!email || !password) {
+        // Check if email or password is empty
+        alert('Please fill out all required fields.');
+    } else {
+        fetch('http://localhost:3001/users/signup', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email, password }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Signup successful!');
+            } else {
+                alert('Signup failed: ' + data.message);
+            }
+        });
+    }
+});
+
+
+document.getElementById('loginForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const email = document.getElementById('loginEmail').value;
+    const password = document.getElementById('loginPassword').value;
+
+    if (!email || !password) {
+        // Check if email or password is empty
+        alert('Please fill out all required fields.');
+    } else {
+        fetch('http://localhost:3001/users/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email, password }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                localStorage.setItem('token', data.token);
+                alert('Login successful!');
+            } else {
+                alert('Login failed: ' + data.message);
+            }
+        });
+    }
+});
