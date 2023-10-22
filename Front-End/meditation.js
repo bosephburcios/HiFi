@@ -79,4 +79,3 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 200); // Adjust the interval as needed
     }
 });
-
