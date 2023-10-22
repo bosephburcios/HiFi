@@ -14,12 +14,13 @@
         <div class="logo">
             <img src="images/HifiLogo.png" alt="" class="logo-img">
         </div>
+
         <div class="menu-icon" id="menu-icon">
             <div class="line"></div>
             <div class="line"></div>
             <div class="line"></div>
         </div>
-    
+        
         <div class="menu" id="menu">
             <a href="#">Home</a>
             <a href="#">Dashboard</a>
@@ -31,13 +32,63 @@
         </div>
     </nav>
 
+    <!-- Language Dropdown -->
+    <div class="language-dropdown">
+        <select class="language-select" onchange="changeLanguage()">
+            <option value="en" selected>English</option>
+            <option value="es">Spanish</option>
+            <option value="viet">Vietnamese</option>
+            <option value="zh">Chinese</option>
+            <option value="kor">Korean</option>
+            <option value="hindi">Hindi</option>
+        </select>
+    </div>
+        
     <!-- Home -->
     <div class="content">
-        <div class="textBox">
+        <div class="textBox" data-lang="en"> <!-- Set the default language to English -->
             <h2>Your Health is <span>#1</span></h2>
-            <p>"Construction laborers are also at a greater risk of suicide than other professions. According to the CDC, the rate of suicide among male construction workers is four times higher than the general population." - Procore </p>
+            <!-- English text -->
+            <p>"Construction laborers are also at a greater risk of suicide than other professions. According to the CDC, the rate of suicide among male construction workers is four times higher than the general population." - Procore</p>
             <a href="https://www.procore.com/library/mental-health-construction" class="learnmore" target="_blank">Learn More</a>
             <a href="#" class="support-button" id="support">Click Here For Support</a>
+        </div>
+        <div class="textBox" data-lang="es" style="display: none;"> <!-- Initially hide the Spanish content -->
+            <h2>Tu salud es <span>#1</span></h2>
+            <!-- Spanish text -->
+            <p>"Los trabajadores de la construcción también tienen un mayor riesgo de suicidio que otras profesiones. Según los CDC, la tasa de suicidio entre los trabajadores de la construcción es cuatro veces mayor que la de la población en general." - Procore</p>
+            <a href="https://www.procore.com/library/mental-health-construction" class="learnmore" target="_blank">Saber más</a>
+            <a href="#" class="support-button" id="support">Haga clic aquí para obtener ayuda</a>
+        </div>
+        <div class="textBox" data-lang="viet" style="display: none;"> <!-- Initially hide the Vietnamese content -->
+            <h2>Sức khỏe của bạn là <span>số 1</span></h2>
+            <!-- Vietnamese text -->
+            <p>"Lao động xây dựng cũng có nguy cơ tự tử cao hơn các ngành nghề khác. Theo CDC, tỷ lệ tự tử ở nam công nhân xây dựng cao gấp 4 lần so với dân số nói chung." - Procore</p>
+            <a href="https://www.procore.com/library/mental-health-construction" class="learnmore" target="_blank">Tìm hiểu thêm</a>
+            <a href="#" class="support-button" id="support">Bấm vào đây để được hỗ trợ</a>
+        </div>
+
+        <div class="textBox" data-lang="zh" style="display: none;"> <!-- Initially hide the Chinese content -->
+            <h2>您的健康狀況是 <span>#1</span></h2>
+            <!-- Chinese text -->
+            <p>“建築工人的自殺風險也比其他職業更高。根據疾病預防控制中心的數據，男性建築工人的自殺率是一般人群的四倍。” - 普羅核</p>
+            <a href="https://www.procore.com/library/mental-health-construction" class="learnmore" target="_blank">了解更多</a>
+            <a href="#" class="support-button" id="support">點擊此處獲取支持</a>
+        </div>
+
+        <div class="textBox" data-lang="kor" style="display: none;"> <!-- Initially hide the Korean content -->
+            <h2>당신의 건강은 <span>#1</span></h2>
+            <!-- Korean text -->
+            <p>"건설 노동자는 다른 직업에 비해 자살 위험도 더 높습니다. CDC에 따르면 남성 건설 노동자의 자살률은 일반 인구의 4배나 높습니다." - 프로코어</p>
+            <a href="https://www.procore.com/library/mental-health-construction" class="learnmore" target="_blank">더 알아보기</a>
+            <a href="#" class="support-button" id="support">지원을 받으려면 여기를 클릭하세요</a>
+        </div>
+        <div class="textBox" data-lang="hindi" style="display: none;"> <!-- Initially hide the Hindi content -->
+            <h2>आपका स्वास्थ्य है <span>#1</span></h2>
+            <!-- Hindi text -->
+            <p>"अन्य व्यवसायों की तुलना में निर्माण मजदूरों में भी आत्महत्या का खतरा अधिक होता है। सीडीसी के अनुसार, पुरुष निर्माण श्रमिकों में आत्महत्या की दर सामान्य आबादी की तुलना में चार गुना अधिक है।" - प्रोकोर</p>
+            <a href="https://www.procore.com/library/mental-health-construction" class="learnmore" target="_blank">और अधिक जानें</a>
+            <a href="#" class="support-button" id="support">सहायता के लिए यहां क्लिक करें</a>
         </div>
         <div class="imgBox">
             <img src="images/picture.jpeg" class="worker">
@@ -50,7 +101,7 @@
     </div>
     <div class="chat-bot-window" id="chatWindow">
         <div class="chat-header">
-            Chatbot
+            ChatBot
             <span class="material-symbols-outlined" onclick="closeChatbot()">close</span>
         </div>
         <div class="chat-messages">
@@ -58,9 +109,10 @@
                 <p>Hi! How can I assist you today?</p>
             </div>
             <div class="options">
-                <button class="option" onclick="selectOption('I am feeling anxious')">I'm feeling anxious</button>
-                <button class="option" onclick="selectOption('I am feeling exhausted')">I'm feeling exhausted</button>
-                <button class="option" onclick="selectOption('I want to feel motivated')">I want to feel motivated</button>
+                <!-- Add data-lang attribute to specify default language -->
+                <button class="option" data-lang="en" data-lang-en="I'm feeling anxious" data-lang-es="Estoy ansioso" onclick="selectOption('I am feeling anxious')">I'm feeling anxious</button>
+                <button class="option" data-lang="en" data-lang-en="I'm feeling exhausted" data-lang-es="Me siento agotado" onclick="selectOption('I am feeling exhausted')">I'm feeling exhausted</button>
+                <button class="option" data-lang="en" data-lang-en="I want to feel motivated" data-lang-es="Quiero sentirme motivado" onclick="selectOption('I want to feel motivated')">I want to feel motivated</button>
             </div>
         </div>
     </div>

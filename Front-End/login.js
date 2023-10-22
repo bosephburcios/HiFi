@@ -1,30 +1,31 @@
-const forms = document.querySelector(".forms"),
-      pwShowHide = document.querySelectorAll(".eye-icon"),
-      links = document.querySelectorAll(".link");
+// Client-side JavaScript
+const forms = document.querySelector(".forms");
+const pwShowHide = document.querySelectorAll(".eye-icon");
+const links = document.querySelectorAll(".link");
 
+// Code for password visibility toggle and form switch
 pwShowHide.forEach(eyeIcon => {
     eyeIcon.addEventListener("click", () => {
         let pwFields = eyeIcon.parentElement.parentElement.querySelectorAll(".password");
         
         pwFields.forEach(password => {
-            if(password.type === "password"){
+            if (password.type === "password") {
                 password.type = "text";
                 eyeIcon.classList.replace("bx-hide", "bx-show");
-                return;
+            } else {
+                password.type = "password";
+                eyeIcon.classList.replace("bx-show", "bx-hide");
             }
-            password.type = "password";
-            eyeIcon.classList.replace("bx-show", "bx-hide");
-        })
-        
-    })
-})      
+        });
+    });
+});
 
 links.forEach(link => {
     link.addEventListener("click", e => {
-       e.preventDefault(); //preventing form submit
+       e.preventDefault(); // Prevent form submission
        forms.classList.toggle("show-signup");
-    })
-})
+    });
+});
 
 document.getElementById('signupForm').addEventListener('submit', function(event) {
     event.preventDefault();
