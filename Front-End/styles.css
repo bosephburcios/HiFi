@@ -17,13 +17,12 @@ body {
 }
 
 .logo-img {
-    max-height: 40px; /* Adjust the max height to fit your design */
-    margin-right: 10px; /* Add some spacing on the right side of the logo */
+    max-height: 40px;
+    margin-right: 10px;
 }
 
 nav {
     background: #333;
-    color: #fff;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -32,6 +31,32 @@ nav {
 
 nav .logo {
     font-size: 24px;
+}
+
+.link {
+    color: rgb(255,255,255,0.75);
+    transition: all 0.4s;
+}
+
+.link:hover {
+    color: #fff;
+}
+
+.link::after {
+    content: '';
+    height: 2px;
+    width: 100%;
+    background: #cc5500;
+    position: absolute;
+    left: 0;
+    bottom: -20px;
+    opacity: 0;
+    transition: all 0.2s;
+    pointer-events: none;
+}
+
+.link:hover::after {
+    opacity: 1;
 }
 
 .menu-icon {
@@ -67,6 +92,165 @@ nav .logo {
     cursor: pointer;
 }
 
+footer {
+    background: #333;
+    color: #fff;
+    text-align: center; /* Center the text */
+    padding: 10px 0;
+    margin-top: auto; /* Push the footer to the bottom */
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.content .textBox {
+    max-width: 600px;
+    margin-left: 25px;
+    text-align: center; /* Center align the text within the box */
+}
+
+.content .textBox h2 {
+    color: #333;
+    font-size: 3.5em;
+    line-height: 1.4em;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.content .textBox h2 span {
+    color: #65a3e7;
+    font-size: 1.2em;
+    font-weight: 900;
+}
+
+.content .textBox p {
+    color: #333;
+}
+
+.content .textBox a {
+    display: inline-block;
+    margin-top: 30px; /* Increased the margin-top for "Learn More" button */
+    padding: 10px 50px; /* Adjusted the padding to make the button less wide */
+    background-color: #65a3e7;
+    color: #fff;
+    border-radius: 40px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-decoration: none;
+    text-align: center; /* Center the button text */
+}
+
+.content .textBox .learnmore {
+    display: inline-block;
+    margin-top: 30px; /* Increased margin to add space between buttons */
+    margin-right: 20px; /* Added margin to the right of the "Learn More" button */
+    padding: 10px 50px;
+    background-color: #65a3e7;
+    color: #fff;
+    border-radius: 40px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-decoration: none;
+    text-align: center;
+}
+
+.content .textBox .support-button {
+    display: inline-block;
+    margin-top: 30px; /* Increased margin to add space between buttons */
+    padding: 10px 20px;
+    background-color: #65a3e7;
+    color: #fff;
+    border-radius: 40px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-decoration: none;
+    text-align: center;
+}
+
+.content .imgBox {
+    width: 550px;
+    height: 500px;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 50px;
+    margin-right: 20px;
+}
+
+.chat-bot-button {
+    position: fixed;
+    bottom: 50px;
+    right: 20px;
+    background-color: #65a3e7;
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.chat-icon {
+    width: 40px;
+    height: 40px;
+}
+
+.chat-bot-window {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 300px;
+    height: 400px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    display: none;
+    flex-direction: column;
+    z-index: 1;
+}
+
+.chat-header {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.chat-messages {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.bot-message {
+    max-width: 70%;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 10px;
+    background-color: #f1f1f1;
+    color: #333;
+    align-self: flex-start;
+}
+
+.user-message {
+    max-width: 70%;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 10px;
+    background-color: #007BFF;
+    color: white;
+    align-self: flex-end;
+}
+
 @media (max-width: 768px) {
     nav .menu {
         display: none;
@@ -86,22 +270,37 @@ nav .logo {
         height: 100%;
         background: #333;
         color: #fff;
-        transition: right 0.3s; /* Smoothly open the menu */
-        padding: 20px 10px 0 10px; /* Add spacing and move the close icon to the top left */
+        transition: right 0.3s;
+        padding: 20px 10px 0 10px;
     }
-    
+
     .menu.active a {
-        text-align: left; /* Adjust text alignment */
-        margin: 10px 0; /* Add spacing between menu items */
+        text-align: left;
+        margin: 10px 0;
     }
-    
+
     .menu.active .close-icon {
         display: block;
-        position: absolute; /* Position the close icon at the top left */
+        position: absolute;
         top: 10px;
         left: 10px;
         font-family: 'Material Symbols Outlined', sans-serif;
-        font-size: 24px; /* Adjust the font size as needed */
-        color: #fff; /* Set the color of the close icon */
+        font-size: 24px;
+        color: #fff;
+    }
+
+    .content {
+        flex-direction: column; /* Stack elements on top of each other */
+        align-items: center; /* Center align on smaller screens */
+    }
+
+    .content .imgBox {
+        display: none; /* Hide the image on smaller screens */
+    }
+
+    .content .textBox {
+        max-width: 100%; /* Full width on smaller screens */
+        text-align: center; /* Center align text on smaller screens */
+        margin: 20px 0; /* Add more spacing to separate image and text */
     }
 }
