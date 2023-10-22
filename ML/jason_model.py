@@ -1,6 +1,5 @@
-#Jason's Factorization Machine Model 
-
-from google.colab import files
+#Jason's Factorization Machine Model (99.2% Accurate on 8000 Epochs, but run at 500 for time)
+import numpy as np
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
@@ -8,7 +7,6 @@ import torch
 import torch.nn as nn
 
 # CSV File
-uploaded = files.upload()
 data = pd.read_csv('synthetic_data.csv')
 
 # prepare Data for FM, use label encoder for any value that can be interpreted
@@ -54,7 +52,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 X_train = torch.tensor(X_train, dtype=torch.float32)
 y_train = torch.tensor(y_train, dtype=torch.long)
 
-for epoch in range(1000):
+for epoch in range(500):
     optimizer.zero_grad()
     output = fm_model(X_train)
     loss = criterion(output, y_train)
@@ -80,3 +78,57 @@ predicted_class_index = recommendations.argmax()
 
 decoded_recommendation = label_encoder_recommendation.inverse_transform([predicted_class_index])[0]
 print("Recommendations:", decoded_recommendation)
+
+
+#model save time
+torch.save(fm_model.state_dict(), 'jason_model.pth')
+
+"""
+import joblib
+from my_factorization_machine_model import FactorizationMachine
+
+# Assuming 'fm_model' is your PyTorch model
+torch.save(fm_model.state_dict(), 'fm_model_state.pth')
+joblib.dump(label_encoder_weather, 'label_encoder_weather.joblib')
+joblib.dump(label_encoder_location, 'label_encoder_location.joblib')
+joblib.dump(label_encoder_recommendation, 'label_encoder_recommendation.joblib')
+
+# Load label encoders
+label_encoder_weather = joblib.load('label_encoder_weather.joblib')
+label_encoder_location = joblib.load('label_encoder_location.joblib')
+label_encoder_recommendation = joblib.load('label_encoder_recommendation.joblib')
+
+# Initialize model
+input_dim = X.shape[1]
+num_classes = len(label_encoder_recommendation.classes_)
+factor_dim = 10
+fm_model = FactorizationMachine(input_dim, factor_dim, num_classes)
+
+# Load model state dictionary
+fm_model.load_state_dict(torch.load('fm_model_state.pth'))
+fm_model.eval()  # Set the model to evaluation mode
+
+def recommend(user_input):
+    # Encode weather and location
+    user_input[2] = label_encoder_weather.transform([user_input[2]])[0]
+    user_input[3] = label_encoder_location.transform([user_input[3]])[0]
+
+    # Prepare input tensor
+    x = torch.tensor([user_input], dtype=torch.float32)
+
+    # Get prediction
+    with torch.no_grad():
+        output = fm_model(x)
+        recommendations = output.detach().numpy().flatten()
+
+    # Decode recommendation
+    predicted_class_index = recommendations.argmax()
+    decoded_recommendation = label_encoder_recommendation.inverse_transform([predicted_class_index])[0]
+    return decoded_recommendation
+
+# Test
+user_input = [89, 12, 'Snowy', 'Suburban']
+recommendations = recommend(user_input)
+
+print("Recommendations:", recommendations)
+"""
