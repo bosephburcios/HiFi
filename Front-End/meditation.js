@@ -37,8 +37,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function startCountdown(seconds) {
         userInput.disabled = true;
-
-
         playMeditationAudio(); // Play the meditation audio
 
         let remainingSeconds = seconds;
