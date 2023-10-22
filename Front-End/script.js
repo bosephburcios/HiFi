@@ -169,8 +169,12 @@ function submitAnswers() {
             // Check if the predicted label is "Meditation" and then open "meditation.html"
             if (predictedLabel === "Meditation") {
                 window.location.href = "meditation.html";
-            } else {
-                console.log("Predicted label is not 'Meditation'");
+            } else if (predictedLabel === "Walk") {
+                window.location.href = "walk.html";
+            } else if (predictedLabel === "Public Interaction") {
+                window.location.href = "public_interaction.html";
+            } else if (predictedLabel === "Reflection") {
+                window.location.href = "reflection.html";
             }
         })
         .catch(error => {
