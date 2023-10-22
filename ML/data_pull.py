@@ -12,7 +12,6 @@ row = zip_codes.index(int(zip))
 
 categories = ('null', 'Urban', 'Suburban', 'Rural')
 
-
 APIkey = "46e89de8832f4f74921204441232110"
 base = "http://api.weatherapi.com/v1"
 

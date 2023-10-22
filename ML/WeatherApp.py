@@ -10,4 +10,3 @@ class WeatherApp:
     
     def get_weather(self, location = "Austin"): 
         weather = requests.get(f"{self.base}{self.api_method}?key={self.query}&q={location}&aqi=yes").json
-        info = {"time": weather['location']['localtime'], "condition": weather['condition']['text'], "image": weather['condition']['']}

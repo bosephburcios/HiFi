@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link rel="stylesheet" href="./meditation.css" />
+    <title>Meditation Chamber</title>
+</head>
+
+<body>
+    <div></div>
+
+    <div class="app">
+        <div class="typing-animation">
+            <h1><span class="auto-type"></span></h1>
+        </div>
+        <audio id="meditationAudio" src="Images/monkey.mp3"></audio>
+        <video autoplay loop muted>
+            <source src="Images/monkey.mp4" type="video/mp4">
+        </video>
+        <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+
+        <script src="meditation.js"></script>
+        <div class="centered-input">
+            <input id="userInput" type="number" min="0" , max="999" autofocus inputmode="numeric">
+        </div>
+        <div id="timer" class="hidden">
+            <div id="countdown"></div>
+            <button id="restartButton" class="hidden">Restart</button>
+        </div>
+
+
+    </div>
+</body>
+
+</html>
