@@ -7,11 +7,16 @@ def getZipCode(self):
     base = "http://ip-api.com/json/"
     return requests.get(f"{base}").json()['zip']
 
+<<<<<<< HEAD
 
 def getWeatherInfo(self, zip):
     APIkey = "46e89de8832f4f74921204441232110"
     base = "http://api.weatherapi.com/v1"
     return requests.get(f"{base}/current.json?key={APIkey}&q={zip}&aqi=yes").json()
+=======
+APIkey = "46e89de8832f4f74921204441232110"
+base = "http://api.weatherapi.com/v1"
+>>>>>>> 748345522e257ea0b50921d6e03d0e219e471cd7
 
 def getWeather(self):
     condition = getWeatherInfo(getZipCode())['current']['condition']['text'].lower()
