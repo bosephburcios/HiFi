@@ -35,9 +35,3 @@ elif any(k in condition for k in snowy):
     condition = 'Snowy'
 else:
     condition = 'Sunny'
-
-print(condition)
-
-# with open('data.json', 'w') as file:
-    # json.dump(current_weather, file)
-
