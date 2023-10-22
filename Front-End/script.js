@@ -54,14 +54,53 @@ function selectOption(option) {
 function getBotResponse(option) {
     switch (option) {
         case 'I am feeling anxious':
-            return ["You should do some breathing exercises!"];
+            return getRandomAnxiousResponse();
         case 'I am feeling exhausted':
-            return ["You should take a small break!"];
+            return getRandomExhaustedResponse();
         case 'I want to feel motivated':
-            return ["You should listen to some music!", "Suggested Song: 'Dream On' by Aerosmith"];
+            return getRandomMotivatedResponse();
         default:
             return ["I'm here to help. Please choose an option."];
     }
+}
+
+function getRandomAnxiousResponse() {
+    const responses = [
+        [
+            "Take the present moment and embrace the things you physically feel.",
+            "See the sky, feel your hands, hear the wind blow, smell some fresh-cut grass, taste the fresh air."
+        ],
+        ["You should do some breathing exercises!"],
+        ["Have a straight posture to align those chakras!"],
+        ["If you're trying to sleep but are worrying, get up and journal down what makes you feel anxious.",
+        "Keep up this routine to remind your body that your bed is for sleep."
+        ]
+    ];
+
+    const selectedResponse = responses[Math.floor(Math.random() * responses.length)];
+    return selectedResponse;
+}
+
+function getRandomExhaustedResponse() {
+    const responses = [
+        "You should take a small break.",
+        "Rest is important for your well-being. Take a short nap or a power nap.",
+        "Move those legs, get your body moving to combat that exhaustion.",
+        "Make sure you drink enough water, it's crucial for your well-being."
+    ];
+    const randomIndex = Math.floor(Math.random() * responses.length);
+    return [responses[randomIndex]];
+}
+
+function getRandomMotivatedResponse() {
+    const responses = [
+        ["You should listen to some music!",
+        "Suggested Song: 'Dream On' by Aerosmith",
+        "Watch an inspiring video or read an inspiring book."],
+        ["Belive in yourself! Your limitations-it's only your imagination!"]
+    ];
+    const randomIndex = Math.floor(Math.random() * responses.length);
+    return [responses[randomIndex]];
 }
 
 function closeChatbot() {
@@ -91,4 +130,27 @@ function resetChatbot() {
     `;
     chatMessages.appendChild(optionsDiv);
 }
+
+function changeLanguage() {
+    // Get the selected language from the dropdown
+    var selectedLanguage = document.querySelector(".language-select").value;
+
+    // Get all elements with data-lang attribute
+    var elements = document.querySelectorAll("[data-lang]");
+
+    // Loop through the elements and show/hide text based on the selected language
+    elements.forEach(function (element) {
+        // Get the language of the element
+        var elementLanguage = element.getAttribute("data-lang");
+
+        // Show/hide the element based on the selected language
+        if (elementLanguage === selectedLanguage) {
+            element.style.display = 'block';
+        } else {
+            element.style.display = 'none';
+        }
+    });
+}
+
+
 
