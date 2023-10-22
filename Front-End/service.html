@@ -6,11 +6,9 @@
     <title>Services</title>
     <link rel="stylesheet" href="services.css">
     <script src="option.js"></script>
-
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 </head>
 <body>
-
     <!-- Navigation Bar -->
     <nav>
         <div class="logo">
@@ -33,16 +31,48 @@
             </div>
         </div>
     </nav>
-
+    
     <!-- Services -->
     <div class="header">
         <h1>We're Here to Help You!</h1>
         <p>Select a service to get started</p>
     </div>
 
+    <!-- Mobile View -->
+    <ul class="accordion">
+        <li>
+            <input type="radio" name="accordion" id="first" checked>
+            <label for="first">Meditation</label>
+            <div class="mobile-content">
+                <p>Meditation is a powerful tool to calm your mind and reduce stress. It can help you improve focus and well-being.</p>
+            </div>
+        </li>
+        <li>
+            <input type="radio" name="accordion" id="second">
+            <label for="second">Walk</label>
+            <div class="mobile-content">
+                <p>Taking a walk can boost your mood and increase your physical activity. It's a great way to clear your mind and reduce anxiety.</p>
+            </div>
+        </li>
+        <li>
+            <input type="radio" name="accordion" id="third">
+            <label for="third">Public Interaction</label>
+            <div class="mobile-content">
+                <p>Engaging with the public can help improve your social skills and reduce feelings of isolation. It's a step towards building connections and self-confidence.</p>
+            </div>
+        </li>
+        <li>
+            <input type="radio" name="accordion" id="fourth">
+            <label for="fourth">Reflection</label>
+            <div class="mobile-content">
+                <p>Reflection allows you to introspect and gain insights into your thoughts and feelings. It's a valuable practice for personal growth and self-awareness.</p>
+            </div>
+        </li>
+    </ul>
+
     <div class="services">
         <div class="service">
-            <h3>Meditation</h3>
+            <h3 class="service-title">Meditation</h3>
             <div class="service-details">
                 <span class="material-symbols-outlined">
                     self_improvement
@@ -53,7 +83,7 @@
         </div>
 
         <div class="service">
-            <h3>Walk</h3>
+            <h3 class="service-title">Walk</h3>
             <div class="service-details">
                 <span class="material-symbols-outlined">
                     directions_run
@@ -64,7 +94,7 @@
         </div>
 
         <div class="service">
-            <h3>Public Interaction</h3>
+            <h3 class="service-title">Public Interaction</h3>
             <div class="service-details">
                 <span class="material-symbols-outlined">
                     diversity_3
@@ -75,7 +105,7 @@
         </div>
 
         <div class="service">
-            <h3>Reflection</h3>
+            <h3 class="service-title">Reflection</h3>
             <div class="service-details">
                 <span class="material-symbols-outlined">
                     psychology_alt
@@ -109,6 +139,18 @@
 
         document.getElementById('reflection').addEventListener('click', function() {
             window.location.href = 'reflection.html';
+        });
+
+        const menuIcon = document.getElementById('menu-icon');
+        const menu = document.getElementById('menu');
+        const closeIcon = document.getElementById('close-icon');
+
+        menuIcon.addEventListener('click', () => {
+            menu.classList.toggle('active');
+        });
+
+        closeIcon.addEventListener('click', () => {
+            menu.classList.toggle('active');
         });
     </script>
 </body>

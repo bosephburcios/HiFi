@@ -30,6 +30,7 @@ body {
 .header p {
     font-size: 1.2em;
     color: #666;
+    margin-top: 10px;
 }
 
 /* Style the services section */
@@ -188,58 +189,116 @@ footer {
     margin-top: auto; /* Push the footer to the bottom */
 }
 
+.accordion {
+    display: none;
+}
+
 /* Media query for smaller screens */
 @media (max-width: 768px) {
     .services {
-        flex-direction: column;
-        align-items: center;
+        display: none;
     }
 
-    .service-details {
-        display: block; /* Show the details on small screens */
-    }
-
-    /* Add styles for service options */
-    .services {
-        display: flex;
-        justify-content: space-between;
-        margin: 20px;
-    }
-
-    .service {
-        width: 22%;
-        padding: 10px;
-        background-color: #f3f3f3;
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        text-align: center;
-        cursor: pointer;
-        transition: transform 0.2s;
-    }
-
-    .service:hover {
-        transform: scale(1.05);
-    }
-
-    .service h3 {
-        margin: 0;
-        font-size: 20px;
-        font-weight: bold;
-    }
-
-    .service-details {
-        display: none; /* Initially hide the details */
-        padding: 10px;
-    }
-
-    .get-started-button {
-        background-color: #65a3e7;
-        color: white;
-        padding: 10px;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
+    html, body {
         width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+    }
+
+    nav .menu {
+        display: none;
+    }
+    
+    .menu-icon {
+        display: block;
+    }
+
+    .menu.active {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 250px;
+        height: 100%;
+        background: #333;
+        color: #fff;
+        transition: right 0.3s;
+        padding: 20px 10px 0 10px;
+    }
+
+    .menu.active a {
+        text-align: left;
+        margin: 10px 0;
+    }
+
+    .menu.active .close-icon {
+        display: block;
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        font-family: 'Material Symbols Outlined', sans-serif;
+        font-size: 24px;
+        color: #fff;
+    }
+
+    .accordion {
+        display: block;
+        margin: -50px auto 0 auto;
+        width: 400px;
+    }
+
+    .accordion li {
+        list-style: none;
+        text-align: center;
+        width: 100%;
+        padding: 10px;
+        margin-top: 30px;
+        border-radius: 8px;
+        background: #e3edf7;
+        box-shadow: 6px 6px 10px -1px rgb(0, 0, 0.15),
+                    -6px -6px 10px -1px rgb(255, 255, 255, 0.7);
+    }
+
+    .accordion li label {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        font-size: 18px;
+        font-weight: 500;
+        cursor: pointer;
+    }
+
+    label::before {
+        content: '+';
+        margin-right: 10px;
+        font-size: 24px;
+        font-weight: 600;
+    }
+    
+    input[type="radio"] {
+        display: none;
+    }
+
+    .accordion .mobile-content {
+        color: #555;
+        padding: 0 10px;
+        line-height: 26px;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s, padding 0.3s;
+    }
+
+    .accordion input[type="radio"]:checked + label + .mobile-content {
+        max-height: 400px;
+        padding: 10px 10px 20px;
+    }
+
+    .accordion input[type="radio"]:checked + label::before {
+        content: '-';
     }
 }
+
 
