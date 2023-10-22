@@ -20,7 +20,7 @@ data['Weather'] = label_encoder_weather.fit_transform(data['Weather'])
 X = data[['Heartbeat', 'Hours_Worked', 'Weather', 'Location']].values.astype(np.float32)
 
 label_encoder_recommendation = LabelEncoder()
-y = label_encoder_recommendation.fit_transform(data['Recommendation'])
+y = label_encoder_recommendation.fit_transform(data['Recommendation'])  # encode the recommendation
 
 
 
@@ -47,11 +47,12 @@ fm_model = FactorizationMachine(input_dim, factor_dim, num_classes)
 criterion = nn.CrossEntropyLoss()
 optimizer = torch.optim.Adam(fm_model.parameters(), lr=0.001)
 
-
+# Split data into train and test sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 X_train = torch.tensor(X_train, dtype=torch.float32)
 y_train = torch.tensor(y_train, dtype=torch.long)
 
+# Train the model
 for epoch in range(500):
     optimizer.zero_grad()
     output = fm_model(X_train)
@@ -61,7 +62,7 @@ for epoch in range(500):
     print(f'Epoch {epoch+1}, Loss: {loss.item():.4f}')
 
 
-# Step 8: Make Recommendations
+# Make Recommendations
 def recommend(user_input):
     user_input[2] = label_encoder_weather.transform([user_input[2]])[0]  # Encode weather
     user_input[3] = label_encoder_location.transform([user_input[3]])[0]  # Encode location
