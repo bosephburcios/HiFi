@@ -1,4 +1,6 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, Response
+# from flask_cors import CORS, cross_origin
+from flask import make_response
 
 import numpy as np
 import pandas as pd
@@ -7,6 +9,8 @@ from sklearn.preprocessing import MinMaxScaler, LabelEncoder
 import joblib
 
 app = Flask(__name__)
+# CORS(app)
+
 
 def preprocess_user_input(heartbeat, hours_worked, weather, location):
     # Step 1: Create a DataFrame from the inputs
@@ -35,11 +39,34 @@ def preprocess_user_input(heartbeat, hours_worked, weather, location):
 
     return input_data
 
+
+@app.route('/')
+def helloWorld():
+    return "Hello World"
+
+@app.after_request
+def after_request(response):
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+    response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
+
+    return response
+
+# @app.before_request
+# def before_request():
+#     print(request.method)
+#     if request.method == 'OPTIONS':
+#         res = Response()
+#         res.headers['Access-Control-Allow-Origin'] = '*'
+#         return res
+    
 @app.route('/predict', methods=['POST'])
+# @cross_origin()
 def predict():
+    print(request.method)
     data = request.json
-    heartbeat = data['heartbeat']
-    hours_worked = data['hours_worked']
+    heartbeat = data['heartRate']
+    hours_worked = data['hoursWorked']
     weather = data['weather']
     location = data['location']
 
@@ -56,10 +83,11 @@ def predict():
     return jsonify(label=predicted_label[0])
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(debug=True, port=3000)
 
 
 
+    
 
 # # Arbitrary Test Case
 # heartbeat = 72.0

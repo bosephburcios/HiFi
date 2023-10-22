@@ -105,13 +105,43 @@
         </div>
         <div class="chat-messages">
             <div class="message bot-message">
-                <p>Hi! How can I assist you today?</p>
+                <p>Hi! Let us know how you are feeling today?</p>
             </div>
             <div class="options">
                 <!-- Add data-lang attribute to specify default language -->
-                <button class="option" data-lang="en" data-lang-en="I'm feeling anxious" data-lang-es="Estoy ansioso" onclick="selectOption('I am feeling anxious')">I'm feeling anxious</button>
+                <!-- <button class="option" data-lang="en" data-lang-en="I'm feeling anxious" data-lang-es="Estoy ansioso" onclick="selectOption('I am feeling anxious')">I'm feeling anxious</button>
                 <button class="option" data-lang="en" data-lang-en="I'm feeling exhausted" data-lang-es="Me siento agotado" onclick="selectOption('I am feeling exhausted')">I'm feeling exhausted</button>
-                <button class="option" data-lang="en" data-lang-en="I want to feel motivated" data-lang-es="Quiero sentirme motivado" onclick="selectOption('I want to feel motivated')">I want to feel motivated</button>
+                <button class="option" data-lang="en" data-lang-en="I want to feel motivated" data-lang-es="Quiero sentirme motivado" onclick="selectOption('I want to feel motivated')">I want to feel motivated</button> -->
+
+                <!-- <button class="option" data-lang="en" data-lang-en="I'm feeling anxious" data-lang-es="Estoy ansioso" onclick="selectOption('Heartbeat')">Heartbeat</button>
+                <button class="option" data-lang="en" data-lang-en="I'm feeling exhausted" data-lang-es="Me siento agotado" onclick="selectOption('Hours Worked')">Hours Worked</button>
+                <button class="option" data-lang="en" data-lang-en="I want to feel motivated" data-lang-es="Quiero sentirme motivado" onclick="selectOption('Weather')">Weather</button>
+                <button class="option" data-lang="en" data-lang-en="I want to feel motivated" data-lang-es="Quiero sentirme motivado" onclick="selectOption('Location')">Location</button> -->
+
+                <!-- Heart rate -->
+                <p>Heart Rate:</p>
+                <input type="number" step="0.1" id="heartRate">
+
+                <!-- Hours worked -->
+                <p>Hours Worked:</p>
+                <input type="number" step="0.1" id="hoursWorked">
+
+                <!-- Weather options -->
+                <p>Weather:</p>
+                <div class="buttons">
+                    <button onclick="setWeather('Cloudy')">Cloudy</button>
+                    <button onclick="setWeather('Rainy')">Rainy</button>
+                    <button onclick="setWeather('Snowy')">Snowy</button>
+                    <button onclick="setWeather('Sunny')">Sunny</button>
+                </div>
+                <!-- Location options -->
+                <p>Location:</p>
+                <div class="buttons">
+                    <button onclick="setLocation('Urban')">Urban</button>
+                    <button onclick="setLocation('Suburban')">Suburban</button>
+                    <button onclick="setLocation('Rural')">Rural</button>
+                </div>
+                <button onclick="submitAnswers()">Submit</button>  
             </div>
         </div>
     </div>
