@@ -1,0 +1,29 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 40px;
+    padding: 20px;
+    line-height: 1.6;
+    color: #333;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #ddd;
+    padding-bottom:10px;
+}
+
+section.benefit {
+    margin-bottom: 30px;
+    color: #333;
+}
+
+section.benefit h2 {
+    font-size: 1.5em;
+    color: #333;
+}
+
+footer {
+    text-align: center;
+    margin-top: 50px;
+}
