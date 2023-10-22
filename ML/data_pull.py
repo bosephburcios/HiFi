@@ -1,13 +1,14 @@
 import requests
 import json
 
-APIkey = "46e89de8832f4f74921204441232110"
+base = "http://ip-api.com/json/"
 
+city = requests.get(f"{base}").json()['city']
+
+APIkey = "46e89de8832f4f74921204441232110"
 base = "http://api.weatherapi.com/v1"
 
-user_input = input("Enter City: ")
-
-current_weather = requests.get(f"{base}/current.json?key={APIkey}&q={user_input}&aqi=yes").json()
+current_weather = requests.get(f"{base}/current.json?key={APIkey}&q={city}&aqi=yes").json()
 
 print(current_weather)
 
