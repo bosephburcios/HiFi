@@ -1,0 +1,302 @@
+/* Reset default margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Apply styles to the body element */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+}
+
+/* Style the header section */
+.header {
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 80px;
+}
+
+.header h1 {
+    font-size: 2em;
+    color: #333;
+}
+
+.header p {
+    font-size: 1.2em;
+    color: #666;
+    margin-top: 10px;
+}
+
+/* Style the services section */
+.services {
+    display: flex;
+    justify-content: space-around;
+}
+
+/* Style individual service containers */
+.service {
+    text-align: center;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 300px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* Set a fixed height for each service container */
+    height: 400px; /* Adjust this value as needed */
+}
+
+.service h2 {
+    color: #333;
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.service p {
+    color: #666;
+    font-size: 1.1em;
+    text-align: center; /* Align the text center within the box */
+    margin-bottom: 30px;
+}
+
+.service-details .material-symbols-outlined {
+    font-size: 48px; /* Adjust the size as needed */
+    color: #65a3e7; /* Your desired color */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 60px;
+}
+
+.service-details p {
+    text-align: center;
+    margin-bottom: 50px;    
+}
+
+/* Style the "Get Started" button */
+.get-started-button {
+    background-color: #65a3e7;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.get-started-button:hover {
+    background-color: #007BFF;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo-img {
+    max-height: 40px;
+    margin-right: 10px;
+}
+
+nav {
+    background: #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+nav .logo {
+    font-size: 24px;
+}
+
+.link {
+    color: rgb(255,255,255,0.75);
+    transition: all 0.4s;
+}
+
+.link:hover {
+    color: #fff;
+}
+
+.link::after {
+    content: '';
+    height: 2px;
+    width: 100%;
+    background: #cc5500;
+    position: absolute;
+    left: 0;
+    bottom: -20px;
+    opacity: 0;
+    transition: all 0.2s;
+    pointer-events: none;
+}
+
+.link:hover::after {
+    opacity: 1;
+}
+
+.menu-icon {
+    display: none;
+    cursor: pointer;
+    padding: 10px;
+    background: #333;
+}
+
+.line {
+    width: 25px;
+    height: 3px;
+    background: #fff;
+    margin: 3px 0;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    background: #333;
+    color: #fff;
+    transition: right 0.3s;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #fff;
+    margin: 0 15px;
+}
+
+.close-icon {
+    display: none;
+    cursor: pointer;
+}
+
+footer {
+    background: #333;
+    color: #fff;
+    text-align: center; /* Center the text */
+    padding: 10px 0;
+    margin-top: auto; /* Push the footer to the bottom */
+}
+
+.accordion {
+    display: none;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+    .services {
+        display: none;
+    }
+
+    html, body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+    }
+
+    nav .menu {
+        display: none;
+    }
+    
+    .menu-icon {
+        display: block;
+    }
+
+    .menu.active {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 250px;
+        height: 100%;
+        background: #333;
+        color: #fff;
+        transition: right 0.3s;
+        padding: 20px 10px 0 10px;
+    }
+
+    .menu.active a {
+        text-align: left;
+        margin: 10px 0;
+    }
+
+    .menu.active .close-icon {
+        display: block;
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        font-family: 'Material Symbols Outlined', sans-serif;
+        font-size: 24px;
+        color: #fff;
+    }
+
+    .accordion {
+        display: block;
+        margin: -50px auto 0 auto;
+        width: 400px;
+    }
+
+    .accordion li {
+        list-style: none;
+        text-align: center;
+        width: 100%;
+        padding: 10px;
+        margin-top: 30px;
+        border-radius: 8px;
+        background: #e3edf7;
+        box-shadow: 6px 6px 10px -1px rgb(0, 0, 0.15),
+                    -6px -6px 10px -1px rgb(255, 255, 255, 0.7);
+    }
+
+    .accordion li label {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        font-size: 18px;
+        font-weight: 500;
+        cursor: pointer;
+    }
+
+    label::before {
+        content: '+';
+        margin-right: 10px;
+        font-size: 24px;
+        font-weight: 600;
+    }
+    
+    input[type="radio"] {
+        display: none;
+    }
+
+    .accordion .mobile-content {
+        color: #555;
+        padding: 0 10px;
+        line-height: 26px;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s, padding 0.3s;
+    }
+
+    .accordion input[type="radio"]:checked + label + .mobile-content {
+        max-height: 400px;
+        padding: 10px 10px 20px;
+    }
+
+    .accordion input[type="radio"]:checked + label::before {
+        content: '-';
+    }
+}
