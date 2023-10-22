@@ -1,56 +1,68 @@
 import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import tensorflow as tf
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler, OneHotEncoder
-from tensorflow.keras.models import Model
-from tensorflow.keras.layers import Input, Dense, Concatenate
+from sklearn.preprocessing import LabelEncoder, OneHotEncoder, MinMaxScaler
 
-# Load your dataset
-df = pd.read_csv('synthetic_data.csv')
+data = pd.read_csv('synthetic_data.csv')
 
-# Define numerical features and categorical features
-numerical_features = ['Heartbeat', 'Hours_Worked']
-categorical_features = ['Weather', 'Location']
+def unique(col):
+  unique_arr = []
+  for i in range(len(col)):
+    if col[i] not in unique_arr:
+      unique_arr.append(col[i])
+  return unique_arr
 
-# Split the data into training and testing sets
-X_train, X_test, y_train, y_test = train_test_split(df[numerical_features + categorical_features], df['Recommendation'], test_size=0.2, random_state=42, stratify=df['Recommendation'])
+unique(data["Recommendation"])
 
-# Standardize numerical features
-scaler = StandardScaler()
-X_train[numerical_features] = scaler.fit_transform(X_train[numerical_features])
-X_test[numerical_features] = scaler.transform(X_test[numerical_features])
+# Normalize numerical columns
+scaler = MinMaxScaler()
+data[['Heartbeat', 'Hours_Worked']] = scaler.fit_transform(data[['Heartbeat', 'Hours_Worked']])
 
-# One-hot encode categorical features
-encoder = OneHotEncoder(drop='first', sparse=False)
-X_train_encoded = encoder.fit_transform(X_train[categorical_features])
-X_test_encoded = encoder.transform(X_test[categorical_features])
+# One-Hot Encode categorical columns
+data = pd.get_dummies(data, columns=['Weather', 'Location'])
 
-# Combine numerical and categorical features
-X_train_final = pd.concat([X_train[numerical_features], pd.DataFrame(X_train_encoded, columns=encoder.get_feature_names(categorical_features))], axis=1)
-X_test_final = pd.concat([X_test[numerical_features], pd.DataFrame(X_test_encoded, columns=encoder.get_feature_names(categorical_features))], axis=1)
+# Convert 'Recommendation' into integers
+label_encoder = LabelEncoder()
+data['Recommendation'] = label_encoder.fit_transform(data['Recommendation'])
 
-# Define the neural network architecture
-input_dim = X_train_final.shape[1]
+data = data.sample(frac=1)
+X = data.drop('Recommendation', axis=1)
+y = data['Recommendation']
 
-# Input Layer
-input_layer = Input(shape=(input_dim,))
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-# Dense layers for processing
-x = Dense(64, activation='relu')(input_layer)
-x = Dense(32, activation='relu')(x)
+model = tf.keras.Sequential([
+    tf.keras.layers.Dense(128, activation='relu', input_dim=X_train.shape[1]),
+    tf.keras.layers.Dropout(0.3),
+    tf.keras.layers.Dense(64, activation='relu'),
+    tf.keras.layers.Dropout(0.3),
+    tf.keras.layers.Dense(len(y.unique()), activation='softmax')
+])
 
-# Output layer
-output = Dense(1, activation='linear')(x)  # Assuming the output is continuous for recommendations
+model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
-# Create the model
-model = Model(inputs=input_layer, outputs=output)
+history = model.fit(X_train, y_train, validation_data=(X_test, y_test), epochs=50, batch_size=32)
 
-# Compile the model
-model.compile(optimizer='adam', loss='mean_squared_error', metrics=['mae'])  # Assuming mean squared error for regression
+loss, accuracy = model.evaluate(X_test, y_test)
+print(f"Test accuracy: {accuracy * 100:.2f}%")
 
-# Train the model
-model.fit(X_train_final, y_train, epochs=10, batch_size=32, validation_data=(X_test_final, y_test))
 
-# Evaluate the model
-loss, mae = model.evaluate(X_test_final, y_test)
+# Plot accuracy
+plt.plot(history.history['accuracy'], label='Training Accuracy')
+plt.plot(history.history['val_accuracy'], label='Validation Accuracy')
+plt.title('Model Accuracy')
+plt.xlabel('Epoch')
+plt.ylabel('Accuracy')
+plt.legend()
+plt.show()
 
-print(f'Mean Absolute Error: {mae}')
+# Plot loss
+plt.plot(history.history['loss'], label='Training Loss')
+plt.plot(history.history['val_loss'], label='Validation Loss')
+plt.title('Model Loss')
+plt.xlabel('Epoch')
+plt.ylabel('Loss')
+plt.legend()
+plt.show()
